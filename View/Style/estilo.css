@@ -1,0 +1,101 @@
+*{
+    margin:0px;
+    padding:0px;
+  }
+  body{
+    background:#00DBA1 ;/*color de fondo de todo el documento*/
+  }
+  header .main. footer{
+    width:90%;
+    max-width:1000px;
+    margin:20px auto;/*auto sirve para centrar el header*/
+  
+  }
+  header nav{
+    background:#1D67BF;/*color azul*/
+    overflow:hidden;/*con esta propiedad evito que el color previamente establecido, en la linea anterior se pierda por
+    las propiedades de las siguientes lineas de código*/
+    font-family: Verdana;
+  }
+  header nav ul{
+    list-style: none;/*con esto quito los puntos feos de la lista*/
+  }
+  header nav ul li{
+    float:left;/*con esto ponga la lista en una línea en vez de una columna, pero queda superunidos y feo aún*/
+  }
+  header nav ul li a{
+    padding: 10px 50px;/*con esto lo separo*/
+    display:block;/*hace que el los links no sean una pequeña raya horizontal, la hace más grueso*/
+    color:#ffff;/*cambia el color del link(piel)*/
+    text-decoration: none;/*con esto le quito el subrayado que traen los links por defecto*/
+  }
+  header nav ul li a:hover{
+    background:#3F628C;/*el color al cual cambiará cuando pase el cursor por encima(azul pálido)*/
+   }
+   /*-----------------------------------------------modificaciones para los articulos----------------------------------------------------------*/
+  .main .articles{
+    width: 68.5%;
+    margin-right:1.5% ;
+    float: left;
+    color:#ffff;/*color piel*/
+  }
+  .main .articles article{
+    padding:20px;
+    background:#1D67BF;
+    margin-bottom: 20px;
+    font-family:Helvetica;
+    line-height:30px;/*el espacio que hay entre renglones*/
+  }
+  .main .articles article h1{
+    font-family: Verdana;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  
+  /*-----------------------------------------------modificaciones para barra lateral----------------------------------------------------------*/
+  aside{
+    width:30%;
+    background:#1D67BF;/*color del aside*/
+    float: left;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  aside h2{
+    font-family: Verdana;
+    color:#ffff;
+    font-size: 18px;
+  }
+  aside ul{
+    list-style: none;
+  }
+  aside ul li a{
+    font-family: Helvetica;
+    padding:10px 50px;
+    display:block;
+    color:#ffff; /*color blanco */
+    text-decoration: none;/*quita subrayado por defecto de los liks*/
+  }
+  aside ul li a:hover{
+    background:#3F628C;/*superosado*/
+  }
+  /*-------------------------------------------------Sección para el footer--------------------------------------------------------------*/
+  footer{
+    padding: 10px;
+    background:#1D67BF;
+    clear: both;
+    text-align: center;
+    color:#ffff;
+    font-size: 20px;
+  }
+  /*-------------------------Seccion del feo formulario---------------------------------*/
+  table{
+    border:1px solid #F00;
+    padding:20px 25px;
+    margin-top:25px;
+    margin: auto;
+  }
+h3{
+  text-align: center;/*el margin:auto no sirve con los encabezados (20 mins para resolverlo)*/
+}
