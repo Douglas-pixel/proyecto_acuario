@@ -1,12 +1,14 @@
 <?php
+include_once("../Model/filtros_model.php");
+$filtrado= new Conexion();
 $usuario_valido=false;
-    include_once("../Model/filtros_model.php");
+    
     if(isset($_POST["enviar"])){
         $input_of_User=ucwords(strtolower($_POST["user"]));
         $input_of_Password=$_POST["password"];
 
-        $filtrado= new Conexion();
-        $cuantos_hay= $filtrado->Conectar($input_of_User, $input_of_Password);
+        
+        $cuantos_hay= $filtrado->Conectar($input_of_User, $input_of_Password);//determina si existe esa combinacion de usuario y contraseña
         if($cuantos_hay!=0){
             $usuario_valido=true;
             setcookie("nombre_usuario", $input_of_User, time()+120);
@@ -33,6 +35,24 @@ if(isset($_COOKIE["nombre_usuario"])){
 }
 
 include_once("../View/filtros_view.php");
+
+$nombreCookie="Diego";//falta convertilo en cookie
+//$tabla=$comando->fetch(PDO::FETCH_ASSOC);
+$resul=$filtrado->printComentarios("filtrado");//esto es un objeto de un objeto que tiene la funcion fetch(pdo::fetch_assoc)
+
+
+
+while($tabla=$resul->fetch(PDO::FETCH_ASSOC)){//variable resultado definida en filtros_model.php
+    echo $tabla["ID"] ." ". $tabla["nombre"] . " " . $tabla["comentario"] . "<br>";
+    if ($nombreCookie==$tabla["nombre"]){
+        echo "editar" .  "    borrar <br><br>" ;
+
+    }
+
+} 
+
+
+
 
 
 ?>
