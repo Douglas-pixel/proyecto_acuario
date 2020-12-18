@@ -22,5 +22,13 @@
             
             return $this->resultado;
         }
+        function createComentario($dato1, $dato2, $dato3){
+            $this->base= new PDO("mysql:host=localhost; dbname=chalet", "root", "");
+            $this->base->exec("SET CHARSET UTF8");//despues tengo que hacerlo más optimizado(repetir menos código)
+            $sql="INSERT INTO comentarios (seccion, nombre, comentario) VALUES(:secc, :nom, :com)";
+            $this->resultado=$this->base->prepare($sql);
+            $this->resultado->execute(array(":secc"=>$dato1, ":nom"=>$dato2, ":com"=>$dato3));
+            
+        }
     }
 ?>
