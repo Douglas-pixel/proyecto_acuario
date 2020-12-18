@@ -28,7 +28,17 @@
             $sql="INSERT INTO comentarios (seccion, nombre, comentario) VALUES(:secc, :nom, :com)";
             $this->resultado=$this->base->prepare($sql);
             $this->resultado->execute(array(":secc"=>$dato1, ":nom"=>$dato2, ":com"=>$dato3));
-            
+        }
+        function eliminate($usuario_solicitante){
+            $this->base= new PDO("mysql:host=localhost; dbname=chalet", "root", "");
+            $this->base->exec("SET CHARSET UTF8");
+            $sql="DELETE FROM comentarios WHERE nombre=:usuario_solicitante";
+            $this->resultado=$this->base->prepare($sql);
+            $this->resultado->bindValue(":usuario_solicitante", $usuario_solicitante);
+            $this->resultado->execute();
+            echo "hola";
+
+
         }
     }
 ?>

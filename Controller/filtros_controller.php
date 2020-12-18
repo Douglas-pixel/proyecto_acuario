@@ -2,6 +2,7 @@
 include_once("../Model/filtros_model.php");
 $filtrado= new Conexion();
 $usuario_valido=false;
+$nombreCookie="Diego";//falta convertilo en cookie
     
     if(isset($_POST["enviar"])){
         $input_of_User=ucwords(strtolower($_POST["user"]));
@@ -16,7 +17,13 @@ $usuario_valido=false;
             echo "El nombre de usuario y/o contraseña incorrectos  ";
         }
     }
-    //-------------------------------codigo de prueba----------------------------------------
+    //-------------------------------codigo para el DELETE------------------------------------
+
+
+    //----------------------------------------------------------------------------------------
+
+
+    //-------------------------------codigo para CREATE----------------------------------------
     if(isset($_POST["cr"])){
         $seccion=$_POST["Seccion"];
         $nombre=$_POST["Nombre"];
@@ -27,7 +34,7 @@ $usuario_valido=false;
     
       }
 
-    //-----------------------------codigo de prueba----------------------------------------
+    //----------------------------------------------------------------------------------------
 
 
     
@@ -48,26 +55,24 @@ if(isset($_COOKIE["nombre_usuario"])){
 
 include_once("../View/filtros_view.php");
 
-$nombreCookie="Diego";//falta convertilo en cookie
-//$tabla=$comando->fetch(PDO::FETCH_ASSOC);
-$resul=$filtrado->printComentarios("aguamarina");//esto es un objeto de un objeto que tiene la funcion fetch(pdo::fetch_assoc)
 
+//----------------------------------------SECCIÓN DE COMENTARIOS---------------------------------------------
+$resul=$filtrado->printComentarios("filtrado");//esto es un objeto de un objeto que tiene la funcion fetch(pdo::fetch_assoc)
 
 
 while($tabla=$resul->fetch(PDO::FETCH_ASSOC)){//variable resultado definida en filtros_model.php
     echo $tabla["ID"] ." ". $tabla["nombre"] . " " . $tabla["comentario"] . "<br>";
-    if ($nombreCookie==$tabla["nombre"]){
-        echo "editar" .  "    borrar <br><br>" ;
+?> <?php    if ($nombreCookie==$tabla["nombre"]){ ?>
+ 
+            <a href="borrar_comentario.php?pag_origen=<?php echo $_SERVER['PHP_SELF']?> & cookie_name=<?php echo $nombreCookie ?>">
+        <input type='button' name='del' id='del' value='Borrar'
+        ></a> 
+        <br>;
 
-    }
+  <?php  } //aqui reanudo la etiqueta abruptamente cerrada para meter html 
 
 } 
-
-
-
-
-
-?> 
+ ?> 
 <form  method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
     <table>
       <td><input placeholder="seccion" type='text' name='Seccion' size='10' class='centrado'></td>
