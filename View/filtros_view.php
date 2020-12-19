@@ -68,28 +68,28 @@ if(isset($_COOKIE["nombre_usuario"])||$usuario_valido==true){?><!--poniendo de e
 
     while($tabla=$resul->fetch(PDO::FETCH_ASSOC)){//variable resultado definida en filtros_model.php
     echo $tabla["ID"] ." ". $tabla["nombre"] . " " . $tabla["comentario"] . "<br>";
-    if ($nombreCookie==$tabla["nombre"]){ ?>
- 
+    if (isset($_COOKIE["nombre_usuario"])  ||  $usuario_valido==true){
+        if($identidad_usuario==$tabla["nombre"]){
+    ?>
+  
             <a href="borrar_comentario.php?pag_origen=<?php echo $_SERVER['PHP_SELF']?> & 
-            cookie_name=<?php echo $nombreCookie //aqui paso por medio del link las variables necesarias para borrar el comentario en otro archivo?>">
+            cookie_name=<?php echo $identidad_usuario //aqui paso por medio del link las variables necesarias para borrar el comentario en otro archivo?>">
         <input type='button' name='del' id='del' value='Borrar'
         ></a> 
         <br>
 
-  <?php  } //aqui reanudo la etiqueta abruptamente cerrada para meter html 
-
-} 
+  <?php  } } } //aqui reanudo la etiqueta abruptamente cerrada para meter html 
  ?> 
-    
+ <?php if(isset($_COOKIE["nombre_usuario"])||$usuario_valido==true){ //ciere brusco de etiqueta PHP?>
     <form  method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-    <table>
-      <td><input placeholder="seccion" type='text' name='Seccion' size='10' class='centrado'></td>
-      <td><input placeholder="nombre" type='text' name='Nombre' size='10' class='centrado'></td>
+    <table>   
       <td><textarea placeholder="comentario" name="Comentario"></textarea></td>
       <td class='bot'><input type='submit' name='cr' id='cr' value='Insertar'></td></tr>
     </table>
     </form>    
-    
+   
     </footer>
+<?php } ?>    
+
 </body>
 </html>    

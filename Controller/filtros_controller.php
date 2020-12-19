@@ -3,7 +3,7 @@
 include_once("../Model/filtros_model.php");
 $filtrado= new Conexion();
 $usuario_valido=false;
-$nombreCookie="Diego";//falta convertilo en cookie
+$identidad_usuario="";
     
     if(isset($_POST["enviar"])){
         $input_of_User=ucwords(strtolower($_POST["user"]));
@@ -13,23 +13,24 @@ $nombreCookie="Diego";//falta convertilo en cookie
         if($cuantos_hay!=0){
             $usuario_valido=true;
             setcookie("nombre_usuario", $input_of_User, time()+120);
+            $identidad_usuario=$input_of_User;
         }else{
             echo "El nombre de usuario y/o contraseña incorrectos  ";
         }
     }
-    
+ if(isset($_COOKIE["nombre_usuario"])){
+    $identidad_usuario=$_COOKIE["nombre_usuario"];
+ }  
 
     //-------------------------------codigo para CREATE----------------------------------------
+    
     if(isset($_POST["cr"])){
-        $seccion=$_POST["Seccion"];
-        $nombre=$_POST["Nombre"];
+        $seccion="filtrado";
+        $nombre=$identidad_usuario;
         $comentario=$_POST["Comentario"];
         $filtrado->createComentario($seccion, $nombre, $comentario);
 
     }
-
-    //----------------------------------------------------------------------------------------
-
 
     
     /*
@@ -37,7 +38,7 @@ $nombreCookie="Diego";//falta convertilo en cookie
     $cadena = $_SERVER['PHP_SELF'];
     $array = explode("/", $cadena);
     echo $array[2];*/
-// necesito las variables del post
+// ------------------------------------Notificar si estás logueado
 
 if(isset($_COOKIE["nombre_usuario"])){
     echo "Has iniciado sesión como, " . $_COOKIE['nombre_usuario'];
