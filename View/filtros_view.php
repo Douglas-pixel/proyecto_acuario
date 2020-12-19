@@ -32,7 +32,7 @@ if(isset($_COOKIE["nombre_usuario"])||$usuario_valido==true){?><!--poniendo de e
                 <p>
                     Para el correcto mantenimiento de un acuario marino es primordial que el agua sea en todo momento de 
                      excelente calidad. Cualquier alteración físico-química del agua provoca una modificación de las 
-                     condicionesfísicas de los habiantes del acuario, cuyas consecuenciasserán un débil desarrollo, renuencia 
+                     condicionesfísicas de los habiantes del acuario, cuyas consecuencias serán un débil desarrollo, renuencia 
                      a alimentarse, sensibilidad adquirida a las enfermedades parasitarias e incluso una muda en el caso de los
                      crústaeos. La filtración del agua es pues la clave del éxito.
                 </p>
@@ -60,7 +60,36 @@ if(isset($_COOKIE["nombre_usuario"])||$usuario_valido==true){?><!--poniendo de e
         </ul>
     </aside>
     <footer>
-      <p>Douglas Navarrete future web developer</P>
+    <?php
+
+//----------------------------------------SECCIÓN DE COMENTARIOS---------------------------------------------
+    $resul=$filtrado->printComentarios("filtrado");//esto es un objeto de un objeto que tiene la funcion fetch(pdo::fetch_assoc)
+
+
+    while($tabla=$resul->fetch(PDO::FETCH_ASSOC)){//variable resultado definida en filtros_model.php
+    echo $tabla["ID"] ." ". $tabla["nombre"] . " " . $tabla["comentario"] . "<br>";
+    if ($nombreCookie==$tabla["nombre"]){ ?>
+ 
+            <a href="borrar_comentario.php?pag_origen=<?php echo $_SERVER['PHP_SELF']?> & 
+            cookie_name=<?php echo $nombreCookie //aqui paso por medio del link las variables necesarias para borrar el comentario en otro archivo?>">
+        <input type='button' name='del' id='del' value='Borrar'
+        ></a> 
+        <br>
+
+  <?php  } //aqui reanudo la etiqueta abruptamente cerrada para meter html 
+
+} 
+ ?> 
+    
+    <form  method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+    <table>
+      <td><input placeholder="seccion" type='text' name='Seccion' size='10' class='centrado'></td>
+      <td><input placeholder="nombre" type='text' name='Nombre' size='10' class='centrado'></td>
+      <td><textarea placeholder="comentario" name="Comentario"></textarea></td>
+      <td class='bot'><input type='submit' name='cr' id='cr' value='Insertar'></td></tr>
+    </table>
+    </form>    
+    
     </footer>
 </body>
 </html>    

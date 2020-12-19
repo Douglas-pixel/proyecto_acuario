@@ -1,12 +1,13 @@
 <?php
-    $usuario_valido=false;
-    include_once("../Model/filtros_model.php");
+include_once("../Model/filtros_model.php");
+$aguaMarina= new Conexion();
+$usuario_valido=false;
+$nombreCookie="Romero";
     if(isset($_POST["enviar"])){
         $input_of_User=ucwords(strtolower($_POST["user"]));
         $input_of_Password=$_POST["password"];
 
-        $filtrado= new Conexion();
-        $cuantos_hay= $filtrado->Conectar($input_of_User, $input_of_Password);
+        $cuantos_hay= $aguaMarina->Conectar($input_of_User, $input_of_Password);
         if($cuantos_hay!=0){
             $usuario_valido=true;
             setcookie("nombre_usuario", $input_of_User, time()+120);
@@ -14,6 +15,17 @@
             echo "El nombre de usuario y/o contraseña incorrectos  ";
         }
     }
+//-------------------------------codigo para CREATE----------------------------------------
+    if(isset($_POST["cr"])){
+        $seccion=$_POST["Seccion"];
+        $nombre=$_POST["Nombre"];
+        $comentario=$_POST["Comentario"];
+        $aguaMarina->createComentario($seccion, $nombre, $comentario);
+    
+    }
+    
+        //----------------------------------------------------------------------------------------
+    
 
 
     
