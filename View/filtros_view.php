@@ -48,18 +48,16 @@ if(isset($_COOKIE["nombre_usuario"])||$usuario_valido==true){?><!--poniendo de e
                     acuarofilia marina. Este sistema mantiene el agua límpida y asegura una propiedades fisíco-químicas 
                     constantes. El equilibrio biológico es estable.
                 </p>
-            </article>
+            </article>         
     </section>
-    <aside>
-        <h2>Calculadora de algo</h2>
-        <ul>
-            <li><a href= "#"></a></li>
-            <li><a href= "#"></a></li>
-            <li><a href= "#"></a></li>
-            <li><a href= "#"></a></li>
-        </ul>
-    </aside>
+    <?php if($identidad_usuario!=""){
+        include_once("../Controller/calculadora.php");
+    }else{
+        echo "calculadora solo para usuarios registrados";
+    }?>
+
     <footer>
+           
     <?php
 
 //----------------------------------------SECCIÓN DE COMENTARIOS---------------------------------------------

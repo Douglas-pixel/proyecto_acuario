@@ -18,7 +18,8 @@ $identidad_usuario="";
             echo "El nombre de usuario y/o contraseña incorrectos  ";
         }
     }
- if(isset($_COOKIE["nombre_usuario"])){
+ //------------------------------------------------------------   
+ if(isset($_COOKIE["nombre_usuario"])){//para que la variable $identidad_usuario siempre tenga un valor diferente de vacio
     $identidad_usuario=$_COOKIE["nombre_usuario"];
  }  
 
@@ -40,10 +41,8 @@ $identidad_usuario="";
     echo $array[2];*/
 // ------------------------------------Notificar si estás logueado
 
-if(isset($_COOKIE["nombre_usuario"])){
-    echo "Has iniciado sesión como, " . $_COOKIE['nombre_usuario'];
-}else if($usuario_valido==true){
-    echo "Has iniciado sesión como, $input_of_User";
+if(isset($_COOKIE["nombre_usuario"]) || $usuario_valido==true){
+    echo "Has iniciado sesión como, " . $identidad_usuario;
 }else{
     include_once("../View/formulario.php");
 }
