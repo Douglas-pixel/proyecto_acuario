@@ -29,7 +29,8 @@ $identidad_usuario="";
         $seccion="filtrado";
         $nombre=$identidad_usuario;
         $comentario=$_POST["Comentario"];
-        $filtrado->createComentario($seccion, $nombre, $comentario);
+        $fecha=date('Y-m-d');
+        $filtrado->createComentario($seccion, $nombre, $comentario, $fecha);
 
     }
 
@@ -41,12 +42,13 @@ $identidad_usuario="";
     echo $array[2];*/
 // ------------------------------------Notificar si estás logueado
 
-if(isset($_COOKIE["nombre_usuario"]) || $usuario_valido==true){
+if($identidad_usuario!=""){
     echo "Has iniciado sesión como, " . $identidad_usuario;
 }else{
     include_once("../View/formulario.php");
 }
 
 include_once("../View/filtros_view.php");
+ 
 ?>
 
