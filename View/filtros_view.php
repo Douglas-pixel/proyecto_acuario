@@ -60,7 +60,7 @@ if($identidad_usuario!=""){?><!--poniendo de esta manaera toda rara el condicona
            
     <?php
 
-//----------------------------------------SECCIÓN DE COMENTARIOS---------------------------------------------
+//----------------------------------------READ ALL WRITTEN COMMENTS---------------------------------------------
     $resul=$filtrado->printComentarios("filtrado");//esto es un objeto de un objeto que tiene la funcion fetch(pdo::fetch_assoc)
 
 
@@ -70,17 +70,24 @@ if($identidad_usuario!=""){?><!--poniendo de esta manaera toda rara el condicona
 
     if (isset($_COOKIE["nombre_usuario"])  ||  $usuario_valido==true){
         if($identidad_usuario==$tabla["nombre"]){
-    ?>
+    //--------------------------------------BUTTON TO ERASE COMMENT----------------------------------------------?>
   
             <a href="borrar_comentario.php?
             pag_origen=<?php echo $_SERVER['PHP_SELF']?> & 
             cookie_name=<?php echo $identidad_usuario?> & 
             id=<?php echo $tabla["ID"]?> ">
-        <input type='button' name='del' id='del' value='Borrar'
-        ></a> 
-        <br>
-
-  <?php  } } } //aqui reanudo la etiqueta abruptamente cerrada para meter html 
+            <input type='button' name='del' id='del' value='Borrar'
+            ></a> 
+            <br>
+    <!------------------------------------BUTTON TO EDIT COMMENT----------------------------------------------------->   
+             <a href="editComment.php?
+            pag_origen=<?php echo $_SERVER['PHP_SELF']?> &  
+            id=<?php echo $tabla["ID"]?>  &  
+            identidad_usuario=<?php echo $identidad_usuario?> ">
+            <input type='button' name='del' id='del' value='Editar'
+            ></a> 
+            <br>
+  <?php  } } } //-------------------------BOX TO CREATE A COMMENT-------------------------------------------------
  ?> 
  <?php if($identidad_usuario!=""){
       //ciere brusco de etiqueta PHP?>
