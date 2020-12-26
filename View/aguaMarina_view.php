@@ -6,7 +6,7 @@
 </head>
 <body>
 <?php
-if(isset($_COOKIE["nombre_usuario"])||$usuario_valido==true){?><!-- esto sirve para enviar la info necesaria a la pag de cierre de sesión, y no perder la pagina que estabas viendo -->
+if($identidad_usuario!=""){?>
      <a href="cierre_de_sesion.php?pag_origen=<?php echo $_SERVER['PHP_SELF']?>">Cierre de sesión</a>
 <?php     
 }//poniendo de esta manaera toda rara el condiconal, podemos inyectar código html 
@@ -46,46 +46,15 @@ if(isset($_COOKIE["nombre_usuario"])||$usuario_valido==true){?><!-- esto sirve p
 
             </article>
     </section>
-    <aside>
-        <h2>Calculadora de algo</h2>
-        <ul>
-            <li><a href= "#"></a></li>
-            <li><a href= "#"></a></li>
-            <li><a href= "#"></a></li>
-            <li><a href= "#"></a></li>
-        </ul>
-    </aside>
-    <footer>
     <?php
-//----------------------------------------SECCIÓN DE COMENTARIOS---------------------------------------------
-    $resul=$aguaMarina->printComentarios("aguamarina");//esto es un objeto de un objeto que tiene la funcion fetch(pdo::fetch_assoc)
+    if($identidad_usuario!=""){
+        include_once("../Controller/calculadora.php");
+    }else{
+        echo "calculadora solo para usuarios registrados";
+    }
+    include_once("../View/CRUD/crud.php"); 
 
-
-    while($tabla=$resul->fetch(PDO::FETCH_ASSOC)){//variable resultado definida en filtros_model.php
-    echo $tabla["ID"] ." ". $tabla["nombre"] . " " . $tabla["comentario"] . "<br>";
-    if ($nombreCookie==$tabla["nombre"]){ ?>
- 
-            <a href="borrar_comentario.php?pag_origen=<?php echo $_SERVER['PHP_SELF']?> & 
-            cookie_name=<?php echo $nombreCookie //aqui paso por medio del link las variables necesarias para borrar el comentario en otro archivo?>">
-        <input type='button' name='del' id='del' value='Borrar'
-        ></a> 
-        <br>
-
-  <?php  } //aqui reanudo la etiqueta abruptamente cerrada para meter html 
-
-} 
- //-------------------maquetado para nuevos comentarios------------------------------------------------?> 
-    
-    <form  method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-    <table>
-      <td><input placeholder="seccion" type='text' name='Seccion' size='10' class='centrado'></td>
-      <td><input placeholder="nombre" type='text' name='Nombre' size='10' class='centrado'></td>
-      <td><textarea placeholder="comentario" name="Comentario"></textarea></td>
-      <td class='bot'><input type='submit' name='cr' id='cr' value='Insertar'></td></tr>
-    </table>
-    </form>    
-    
-    </footer>
+?>
 
 </body>
 </html>

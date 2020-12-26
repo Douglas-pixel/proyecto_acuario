@@ -1,45 +1,44 @@
 <?php
 include_once("../Model/filtros_model.php");
-$aguaMarina= new Conexion();
+$seccion= new Conexion();
 $usuario_valido=false;
-$nombreCookie="Romero";
+$identidad_usuario="";
+$pagina="aguamarina";
+    
     if(isset($_POST["enviar"])){
         $input_of_User=ucwords(strtolower($_POST["user"]));
         $input_of_Password=$_POST["password"];
-
-        $cuantos_hay= $aguaMarina->Conectar($input_of_User, $input_of_Password);
+        
+        $cuantos_hay= $seccion->Conectar($input_of_User, $input_of_Password);//determina si existe esa combinacion de usuario y contraseña
         if($cuantos_hay!=0){
             $usuario_valido=true;
             setcookie("nombre_usuario", $input_of_User, time()+120);
+            $identidad_usuario=$input_of_User;
         }else{
             echo "El nombre de usuario y/o contraseña incorrectos  ";
         }
     }
-//-------------------------------codigo para CREATE----------------------------------------
+ //------------------------------------------------------------   
+ if(isset($_COOKIE["nombre_usuario"])){//para que la variable $identidad_usuario siempre tenga un valor diferente de vacio
+    $identidad_usuario=$_COOKIE["nombre_usuario"];
+ }  
+
+    //-------------------------------codigo para CREATE----------------------------------------
+    
     if(isset($_POST["cr"])){
-        $seccion=$_POST["Seccion"];
-        $nombre=$_POST["Nombre"];
+        $nombre=$identidad_usuario;
         $comentario=$_POST["Comentario"];
-        $aguaMarina->createComentario($seccion, $nombre, $comentario);
-    
+        $fecha=date('Y-m-d');
+        $seccion->createComentario($pagina, $nombre, $comentario, $fecha);
+
     }
-    
-        //----------------------------------------------------------------------------------------
-    
-
 
     
-    /*
-    
-    $cadena = $_SERVER['PHP_SELF'];
-    $array = explode("/", $cadena);
-    echo $array[2];*/
-// necesito las variables del post
 
-if(isset($_COOKIE["nombre_usuario"])){
-    echo "Has iniciado sesión como, " . $_COOKIE['nombre_usuario'];
-}else if($usuario_valido==true){
-    echo "Has iniciado sesión como, $input_of_User";
+// ------------------------------------Notificar si estás logueado
+
+if($identidad_usuario!=""){
+    echo "Has iniciado sesión como, " . $identidad_usuario;
 }else{
     include_once("../View/formulario.php");
 }

@@ -1,15 +1,16 @@
 <?php
 //-----------------------------creacion del objeto 
 include_once("../Model/filtros_model.php");
-$filtrado= new Conexion();
+$seccion= new Conexion();
 $usuario_valido=false;
 $identidad_usuario="";
+$pagina="filtrado";
     
     if(isset($_POST["enviar"])){
         $input_of_User=ucwords(strtolower($_POST["user"]));
         $input_of_Password=$_POST["password"];
         
-        $cuantos_hay= $filtrado->Conectar($input_of_User, $input_of_Password);//determina si existe esa combinacion de usuario y contraseña
+        $cuantos_hay= $seccion->Conectar($input_of_User, $input_of_Password);//determina si existe esa combinacion de usuario y contraseña
         if($cuantos_hay!=0){
             $usuario_valido=true;
             setcookie("nombre_usuario", $input_of_User, time()+120);
@@ -26,20 +27,12 @@ $identidad_usuario="";
     //-------------------------------codigo para CREATE----------------------------------------
     
     if(isset($_POST["cr"])){
-        $seccion="filtrado";
         $nombre=$identidad_usuario;
         $comentario=$_POST["Comentario"];
         $fecha=date('Y-m-d');
-        $filtrado->createComentario($seccion, $nombre, $comentario, $fecha);
+        $seccion->createComentario($pagina, $nombre, $comentario, $fecha);
 
     }
-
-    
-    /*
-    
-    $cadena = $_SERVER['PHP_SELF'];
-    $array = explode("/", $cadena);
-    echo $array[2];*/
 // ------------------------------------Notificar si estás logueado
 
 if($identidad_usuario!=""){
