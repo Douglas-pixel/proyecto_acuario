@@ -18,9 +18,9 @@ if($identidad_usuario!=""){?>
             <ul>
                 <li><a href="filtros_controller.php">El filtrado</a></li>
                 <li><a href="aguaMarina_controller.php">Agua marina</a></li><!--para enviar la direccion y que la variable de cierre de sesión sea válida-->
-                <li><a href="#">Instances</a></li>
-                <li><a href="#">Luna</a></li>
-                <li><a href="#">Stigma Combination</a></li>
+                <li><a href="#">Construye tu pecera</a></li>
+                <li><a href="#">Peces para principiantes</a></li>
+                <li><a href="#">Plantas de acuario salado</a></li>
             </ul>
         </nav>
     </header>
